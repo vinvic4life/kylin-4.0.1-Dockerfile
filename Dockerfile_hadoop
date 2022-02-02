@@ -30,7 +30,7 @@ ENV HADOOP_HOME /home/admin/hadoop-$HADOOP_VERSION
 ENV HIVE_HOME /home/admin/apache-hive-$HIVE_VERSION-bin
 ENV HADOOP_CONF $HADOOP_HOME/etc/hadoop
 ENV HADOOP_CONF_DIR $HADOOP_HOME/etc/hadoop
-ENV SPARK_HOME /home/admin/spark-$SPARK_VERSION-bin-hadoop2.7
+ENV SPARK_HOME /home/admin/spark-$SPARK_VERSION-bin-hadoop3.2
 ENV SPARK_CONF_DIR $SPARK_HOME/conf
 ENV ZK_HOME /home/admin/zookeeper-$ZK_VERSION
 ENV KAFKA_HOME /home/admin/kafka_2.11-$KAFKA_VERSION
@@ -43,7 +43,7 @@ WORKDIR /home/admin
 # install tools
 RUN apt-get update -y
 RUN apt-get upgrade -y
-RUN apt-get install wget curl lsb-release gnupg vim -y
+RUN apt-get install wget curl lsb-release gnupg net-tools apt-utils vim -y
 
 # install java
 RUN apt-get update && \
@@ -96,7 +96,7 @@ RUN wget https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK
     && cp $HIVE_HOME/conf/hive-site.xml $SPARK_HOME/conf \
     && cp $SPARK_HOME/yarn/*.jar $HADOOP_HOME/share/hadoop/yarn/lib
 RUN cp $HIVE_HOME/lib/mysql-connector-java-5.1.24.jar $SPARK_HOME/jars
-RUN cp $HIVE_HOME/hcatalog/share/hcatalog/hive-hcatalog-core-1.2.1.jar $SPARK_HOME/jars/
+RUN cp $HIVE_HOME/hcatalog/share/hcatalog/hive-hcatalog-core-3.1.2.jar $SPARK_HOME/jars/
 COPY conf/spark/* $SPARK_CONF_DIR/
 
 # setup kafka
