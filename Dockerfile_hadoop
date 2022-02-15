@@ -16,7 +16,7 @@
 #
 
 # Docker image with Hadoop/Spark/Hive/ZK/Kafka installed
-FROM ubuntu:20.04
+FROM ubuntu:latest
 
 ENV HIVE_VERSION 3.1.2
 ENV HADOOP_VERSION 3.2.0
